@@ -30,13 +30,10 @@ a:hover {
 /* Header */
 header {
     background: #0d2438;
-    padding: 1rem 20px;
+    padding: 0.8rem 20px;
     position: sticky;
     top: 0;
     z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
 }
 
 header .container {
@@ -46,7 +43,6 @@ header .container {
     width: 100%;
 }
 
-/* Nascondiamo l'H1 di base perché lo stilizziamo nel link */
 header h1 {
     margin: 0;
 }
@@ -59,7 +55,6 @@ header h1 {
 }
 .logo-link:hover {
     text-decoration: none;
-    color: #fff;
 }
 
 .logo-icon {
@@ -68,37 +63,34 @@ header h1 {
     justify-content: center;
     width: 45px;
     height: 45px;
+    flex-shrink: 0;
     border-radius: 50%;
-    background-color: #007BFF; /* Colore di sfondo del cerchio */
+    background-color: #007BFF;
     color: #fff;
     font-weight: 700;
     font-size: 1.4rem;
     margin-right: 15px;
-    border: 2px solid #fff; /* Bordo bianco attorno al cerchio */
+    border: 2px solid #fff;
 }
 
 .logo-text-container {
     display: flex;
     flex-direction: column;
-    font-size: 1.3rem;
     font-weight: 700;
-    font-style: italic; /* Applica il corsivo come richiesto */
     line-height: 1.2;
 }
-
-.logo-line-1, .logo-line-2 {
-    display: block; /* Mantiene le scritte su righe separate */
-}
-
-/* Su desktop nascondiamo le singole righe e mostriamo il testo completo */
-.logo-line-1::after {
-    content: ' "La Meridiana" S.r.l.';
-    white-space: nowrap;
+.logo-line-1 {
+    font-size: 0.9rem;
+    font-weight: 400;
 }
 .logo-line-2 {
-    display: none;
+    font-size: 1.1rem;
+    font-style: italic;
 }
 
+header nav {
+    flex-shrink: 0;
+}
 
 header nav ul {
     list-style: none;
@@ -166,7 +158,7 @@ header nav a:hover {
     background: 
         linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(13, 36, 56, 1) 90%),
         linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-        url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
+        url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2070&auto-format&fit=crop') no-repeat center center/cover;
 }
 
 .hero-content {
@@ -362,35 +354,11 @@ footer {
 
 @media (max-width: 768px) {
     header .container {
-        flex-wrap: nowrap;
+        flex-wrap: nowrap; /* Impedisce di andare a capo */
         align-items: center;
     }
-    
-    /* MODIFICHE LOGO RESPONSIVE */
-    .logo-text-container {
-        font-size: 1rem;
-    }
-    .logo-line-1::after {
-        content: ''; /* Rimuove il testo aggiunto per il desktop */
-    }
-    .logo-line-2 {
-        display: block; /* Mostra la seconda riga */
-    }
-
-
-    .menu-toggle {
-        display: flex;
-        flex-shrink: 0;
-    }
-    
-    /* Il menu di navigazione su desktop è nascosto */
     header nav {
-        display: none;
-    }
-
-    /* Stile per il menu quando è aperto su mobile */
-    .mobile-nav {
-        display: block;
+        display: none; /* Nasconde il menu desktop su mobile */
         position: absolute;
         top: 100%;
         left: 0;
@@ -399,12 +367,19 @@ footer {
         padding: 10px 0;
         border-top: 1px solid #1a3a55;
     }
-    .mobile-nav ul {
+    header nav.active {
+        display: block; /* Mostra il menu quando attivo */
+    }
+    header nav ul {
         flex-direction: column;
         align-items: center;
     }
-    .mobile-nav ul li {
+    header nav ul li {
         margin: 10px 0;
+    }
+    .menu-toggle {
+        display: flex; /* Mostra sempre l'hamburger su mobile */
+        flex-shrink: 0;
     }
     
     #hero-combined { padding-top: 40px; }
@@ -426,4 +401,7 @@ footer {
     .service-grid-colored {
         grid-template-columns: 1fr;
     }
-}```
+    .logo-text-container {
+        display: none; /* Nasconde il testo del logo su schermi molto piccoli */
+    }
+}
